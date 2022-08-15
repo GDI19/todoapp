@@ -17,4 +17,7 @@ class ToDo(models.Model):
     todo_text = models.TextField()
     todo_creation_date = models.DateTimeField()
     todo_updated_date = models.DateTimeField()
-    todo_is_active = models.BooleanField()
+    todo_is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"This is the todo to the {self.todo_project} project"
