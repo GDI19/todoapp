@@ -14,7 +14,7 @@ class ProjectLimitOffsetPagination(LimitOffsetPagination):
 class ToDoLimitOffsetPagination(LimitOffsetPagination):
     default_limit = 20
 
-#class ProjectKwargsFilterView(ListAPIView):
+# class ProjectKwargsFilterView(ListAPIView):
 #    serializer_class = ProjectModelSerializer
 #
 #    def get_queryset(self):
@@ -35,3 +35,7 @@ class ToDoModelViewSet(ModelViewSet):
     serializer_class = TodoModelSerializer
     pagination_class = ToDoLimitOffsetPagination
     filterset_class = ToDoFilter
+
+    def destroy(self, request, pk=None):
+        self.item_to_delete = ToDo.objects.get(pk=pk)
+        self.item_to_delete.todo_is_active = False
