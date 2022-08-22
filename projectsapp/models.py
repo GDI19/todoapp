@@ -8,7 +8,7 @@ class Project(models.Model):
     project_users = models.ManyToManyField(TodoUser)
 
     def __str__(self):
-        return f'This is {self.project_name} project'
+        return f'project: {self.project_name}'
 
 
 class ToDo(models.Model):
@@ -20,4 +20,4 @@ class ToDo(models.Model):
     todo_is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"This is the todo to the {self.todo_project} project"
+        return f"Todo by {self.todo_author} to {self.todo_project}"

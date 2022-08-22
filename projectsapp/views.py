@@ -1,3 +1,4 @@
+from rest_framework import mixins, viewsets
 from rest_framework.viewsets import ModelViewSet
 
 from .filters import ProjectFilter, ToDoFilter
@@ -13,6 +14,7 @@ class ProjectLimitOffsetPagination(LimitOffsetPagination):
 
 class ToDoLimitOffsetPagination(LimitOffsetPagination):
     default_limit = 20
+
 
 # class ProjectKwargsFilterView(ListAPIView):
 #    serializer_class = ProjectModelSerializer
@@ -30,12 +32,14 @@ class ProjectModelViewSet(ModelViewSet):
     filterset_class = ProjectFilter
 
 
-class ToDoModelViewSet(ModelViewSet):
+class ToDoModelViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                       mixins.DestroyModelMixin,
+                       viewsets.GenericViewSet):
     queryset = ToDo.objects.all()
     serializer_class = TodoModelSerializer
     pagination_class = ToDoLimitOffsetPagination
     filterset_class = ToDoFilter
 
-    def destroy(self, request, pk=None):
-        self.item_to_delete = ToDo.objects.get(pk=pk)
-        self.item_to_delete.todo_is_active = False
+    def perform_destroy(self, instance):
+          instance.todo_is_active = False
+          instance.save()
