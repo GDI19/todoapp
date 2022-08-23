@@ -6,7 +6,7 @@ import ProjectsList from './components/Projects.js'
 import TodosList from './components/Todos.js'
 import NotFound404 from './components/NotFound404.js'
 import axios from 'axios'
-import {BrowserRouter, Route, Redirect, Link, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Link, Routes, Navigate} from 'react-router-dom'
 
 
 
@@ -73,13 +73,13 @@ class App extends React.Component {
                             </li>
                         </ul>
                     </nav>
-                    <Switch>
-                        <Route exact path='/' component={() => <UserList users={this.state.users} />} />
-                        <Route exact path='/projects' component={() => <ProjectsList projects={this.state.projects} /> } />
-                        <Route exact path='/todos' component={() => <TodosList todos={this.state.todos} /> } />
-                        <Redirect from='/users' to='/' />
-                        <Route component={NotFound404} />
-                    </Switch>
+                    <Routes>
+                        <Route path='/' element={() => <UserList users={this.state.users} />} />
+                        <Route path='/projects' element={() => <ProjectsList projects={this.state.projec1ts} /> } />
+                        <Route path='/todos' element={() => <TodosList todos={this.state.todos} /> } />
+                        <Route path='/users' element={<Navigate replace to='/' />} />
+                        <Route path='*' element={<NotFound404 />} />
+                    </Routes>
                 </BrowserRouter>
             </div>
         )

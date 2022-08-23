@@ -58,4 +58,4 @@ const TodosList = ({todos}) => {
     )
 }
 
-export default TodosList
+export default TodosList;
