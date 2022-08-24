@@ -16,7 +16,7 @@ class App extends React.Component {
         this.state = {
             'users': [],
             'projects': [],
-            'todos':[]
+            'todos': []
         }
     }
 
