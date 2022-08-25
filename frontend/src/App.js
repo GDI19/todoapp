@@ -58,8 +58,9 @@ class App extends React.Component {
 
     render () {
         return(
-            <div>
-                <BrowserRouter>
+
+            <BrowserRouter>
+                    <div>
                     <nav>
                         <ul>
                             <li>
@@ -80,8 +81,9 @@ class App extends React.Component {
                         <Redirect from='/users' to='/' />
                         <Route component={NotFound404} />
                     </Switch>
-                </BrowserRouter>
-            </div>
+                </div>
+            </BrowserRouter>
+
         )
     }
 
