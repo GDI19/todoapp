@@ -1,4 +1,4 @@
-from rest_framework.serializers import HyperlinkedModelSerializer, StringRelatedField
+from rest_framework.serializers import HyperlinkedModelSerializer, StringRelatedField, ModelSerializer
 
 from usersapp.serializers import UserModelSerializer
 from .models import Project, ToDo
@@ -12,9 +12,11 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
         fields = '__all__'
 
 
-class TodoModelSerializer(HyperlinkedModelSerializer):
-    todo_author = UserModelSerializer() # на выходе появится вложенный словарь
-    todo_project = ProjectModelSerializer()
+class TodoModelSerializer(ModelSerializer):
+    # todo_author = UserModelSerializer() # на выходе появится вложенный словарь - проблемы т.к. не массив (Array)
+    # todo_project = ProjectModelSerializer()
+    todo_author = StringRelatedField()  # будут представлены методом __str__ в моделях
+    todo_project = StringRelatedField()
 
     class Meta:
         model = ToDo
