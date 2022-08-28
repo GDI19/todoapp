@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import UserList from './components/User.js'
+import AppUsers from './components/User.js'
 import ProjectsList from './components/Projects.js'
 import TodosList from './components/Todos.js'
 import NotFound404 from './components/NotFound404.js'
@@ -58,8 +58,9 @@ class App extends React.Component {
 
     render () {
         return(
-            <div>
+
                 <BrowserRouter>
+                <div>
                     <nav>
                         <ul>
                             <li>
@@ -74,14 +75,15 @@ class App extends React.Component {
                         </ul>
                     </nav>
                     <Routes>
-                        <Route path='/' element={() => <UserList users={this.state.users} />} />
-                        <Route path='/projects' element={() => <ProjectsList projects={this.state.projec1ts} /> } />
+                        <Route path='/' element={ <AppUsers />} />
+                        <Route path='/projects' element={() => <ProjectsList projects={this.state.projects} /> } />
                         <Route path='/todos' element={() => <TodosList todos={this.state.todos} /> } />
                         <Route path='/users' element={<Navigate replace to='/' />} />
                         <Route path='*' element={<NotFound404 />} />
                     </Routes>
+                </div>
                 </BrowserRouter>
-            </div>
+
         )
     }
 
