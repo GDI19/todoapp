@@ -13,8 +13,10 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
 
 
 class TodoModelSerializer(HyperlinkedModelSerializer):
-    todo_author = UserModelSerializer() # на выходе появится вложенный словарь
-    todo_project = ProjectModelSerializer()
+    # todo_author = UserModelSerializer() # на выходе появится вложенный словарь
+    # todo_project = ProjectModelSerializer()
+    todo_author = StringRelatedField()
+    todo_project = StringRelatedField()
 
     class Meta:
         model = ToDo

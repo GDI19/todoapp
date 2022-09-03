@@ -9,17 +9,17 @@ from rest_framework.pagination import LimitOffsetPagination, PageNumberPaginatio
 from rest_framework.generics import ListAPIView
 
 
-class ProjectPageNumberPagination(PageNumberPagination):
-    page_size = 1
-
-    def get_paginated_response(self, data):
-        return Response(data)
-
-class ToDoPageNumberPagination(PageNumberPagination):
-    page_size = 1
-
-    def get_paginated_response(self, data):
-        return Response(data)
+# class ProjectPageNumberPagination(PageNumberPagination):
+#     page_size = 1
+#
+#     def get_paginated_response(self, data):
+#         return Response(data)
+#
+# class ToDoPageNumberPagination(PageNumberPagination):
+#     page_size = 1
+#
+#     def get_paginated_response(self, data):
+#         return Response(data)
 
 # class ProjectKwargsFilterView(ListAPIView):
 #    serializer_class = ProjectModelSerializer
