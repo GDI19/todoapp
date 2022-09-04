@@ -11,6 +11,6 @@ class ProjectAdmin(admin.ModelAdmin):
 # admin.site.register(To Do)
 @admin.register(ToDo)
 class ToDoAdmin(admin.ModelAdmin):
-    list_display = ('todo_author', 'todo_project', 'todo_creation_date', 'todo_updated_date', 'todo_is_active')
+    list_display = ('todo_author', 'todo_text',  'todo_project', 'todo_creation_date', 'todo_updated_date', 'todo_is_active')
     list_filter = ('todo_project', 'todo_creation_date', 'todo_updated_date')
-    fields = ['todo_author', 'todo_project', ('todo_creation_date', 'todo_updated_date'), 'todo_is_active']
+    fields = ['todo_author', 'todo_text', 'todo_project', ('todo_creation_date', 'todo_updated_date'), 'todo_is_active']
