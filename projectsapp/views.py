@@ -1,4 +1,4 @@
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -34,6 +34,7 @@ class ProjectModelViewSet(ModelViewSet):
     serializer_class = ProjectModelSerializer
     # pagination_class = ProjectPageNumberPagination
     # filterset_fields = ['project_name']
+    permission_classes = [permissions.IsAuthenticated]
     filterset_class = ProjectFilter
 
 
@@ -43,6 +44,7 @@ class ToDoModelViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Re
     queryset = ToDo.objects.all()
     serializer_class = TodoModelSerializer
     # pagination_class = ToDoPageNumberPagination
+    permission_classes = [permissions.IsAuthenticated]
     filterset_class = ToDoFilter
 
     def perform_destroy(self, instance):
