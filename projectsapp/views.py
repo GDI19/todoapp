@@ -4,7 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from .filters import ProjectFilter, ToDoFilter
 from .models import Project, ToDo
-from .serializers import ProjectModelSerializer, TodoModelSerializer
+from .serializers import ProjectModelSerializer, TodoModelSerializer, ProjectModelSerializerBase, TodoModelSerializerBase
 from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
 from rest_framework.generics import ListAPIView
 
@@ -37,8 +37,13 @@ class ProjectModelViewSet(ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     filterset_class = ProjectFilter
 
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            return ProjectModelSerializer
+        return ProjectModelSerializerBase
 
-class ToDoModelViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin,
+
+class ToDoModelViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin,
                        mixins.DestroyModelMixin,
                        viewsets.GenericViewSet):
     queryset = ToDo.objects.all()
@@ -50,3 +55,8 @@ class ToDoModelViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Re
     def perform_destroy(self, instance):
           instance.todo_is_active = False
           instance.save()
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            return TodoModelSerializer
+        return TodoModelSerializerBase
