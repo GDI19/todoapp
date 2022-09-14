@@ -39,13 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', # also required for serving swagger ui's css/js
+    'django.contrib.staticfiles', # also required for serving GraphiQl, swagger ui's css/js
 
     'rest_framework',
     'corsheaders',
     'django_filters',
     'rest_framework.authtoken',
     'drf_yasg',
+    'graphene_django',
 
     'usersapp',
     'projectsapp',
@@ -163,4 +164,8 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
 
+}
+
+GRAPHENE = {
+    'SCHEMA': 'todoapp.schema.schema'
 }
