@@ -4,7 +4,7 @@ from usersapp.serializers import UserModelSerializer
 from .models import Project, ToDo
 
 
-class ProjectModelSerializer(HyperlinkedModelSerializer):
+class ProjectModelSerializer(ModelSerializer):
     project_users = StringRelatedField(many=True) # users будут представлены методом __str__ в моделях
 
     class Meta:
@@ -17,7 +17,7 @@ class ProjectModelSerializerBase(ModelSerializer):
         fields = '__all__'
 
 
-class TodoModelSerializer(HyperlinkedModelSerializer):
+class TodoModelSerializer(ModelSerializer):
     # todo_author = UserModelSerializer() # на выходе появится вложенный словарь
     # todo_project = ProjectModelSerializer()
     todo_author = StringRelatedField()

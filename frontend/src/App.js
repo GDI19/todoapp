@@ -5,6 +5,8 @@ import UserList from './components/User.js'
 import LoginForm from './components/Auth.js'
 import ProjectsList from './components/Projects.js'
 import TodosList from './components/Todos.js'
+import ProjectForm from './components/ProjectForm.js'
+
 import NotFound404 from './components/NotFound404.js'
 import axios from 'axios'
 import {BrowserRouter, Route, Link, Routes, Navigate} from 'react-router-dom'
@@ -30,7 +32,7 @@ class App extends React.Component {
     }
 
     is_authenticated(){
-        return this.state.token != ''
+        return this.state.token !== ''
     }
 
     logout(){
@@ -59,6 +61,33 @@ class App extends React.Component {
         return headers
     }
 
+    delete_project(id){
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/projects/${id}/`, {headers}).then(response => {
+                //const projects = this.state.projects.filter((item)=>item.id !== id)
+                //    this.setState({'projects': projects})
+                this.load_data()
+            }).catch(error => {
+                console.log(error)
+                this.setState({'projects': []})
+                })
+
+    }
+
+    delete_todo(id){
+        // console.log(id)
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/todo/${id}/`, {headers}).then(response => {
+                //const projects = this.state.projects.filter((item)=>item.id !== id)
+                //    this.setState({'projects': projects})
+                this.load_data()
+            }).catch(error => {
+                console.log(error)
+                this.setState({'todos': []})
+                })
+
+    }
+
     load_data() {
         const headers = this.get_headers()
         console.log(headers)
@@ -77,6 +106,7 @@ class App extends React.Component {
         axios.get('http://127.0.0.1:8000/api/projects/', {headers})
             .then(response => {
                 const projects = response.data
+                // console.log(projects)
                     this.setState(
                         {
                             'projects': projects
@@ -115,15 +145,9 @@ class App extends React.Component {
                 <div>
                     <nav>
                         <ul>
-                            <li>
-                                <Link to='/'>Users</Link>
-                            </li>
-                            <li>
-                                <Link to='/projects'>Projects</Link>
-                            </li>
-                            <li>
-                                <Link to='/todos'>Todos</Link>
-                            </li>
+                            <li><Link to='/'>Users</Link></li>
+                            <li><Link to='/projects'>Projects</Link></li>
+                            <li><Link to='/todos'>Todos</Link></li>
                             <li>
                                 {this.is_authenticated() ? <button onClick={()=>this.logout()}>Logout</button> : <Link to='/login'>Login</Link>}
                             </li>
@@ -131,8 +155,9 @@ class App extends React.Component {
                     </nav>
                     <Routes>
                         <Route path='/' element={ <UserList users={this.state.users} />} />
-                        <Route path='/projects' element={<ProjectsList projects={this.state.projects} /> } />
-                        <Route path='/todos' element={<TodosList todos={this.state.todos} /> } />
+                        <Route path='/projects' element={<ProjectsList projects={this.state.projects} delete_project={(id)=>this.delete_project(id)} /> } />
+                        <Route path='/projects/create' element={ <ProjectForm/> } />
+                        <Route path='/todos' element={<TodosList todos={this.state.todos} delete_todo={(id)=>this.delete_todo(id)} /> } />
                         <Route path='/login' element={ <LoginForm get_token={(username, password) => this.get_token(username, password)} />} />
                         <Route path='/users' element={<Navigate replace to='/' />} />
                         <Route path='*' element={<NotFound404 />} />
