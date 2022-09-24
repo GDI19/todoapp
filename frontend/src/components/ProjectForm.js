@@ -13,8 +13,9 @@ class ProjectForm extends React.Component{
     }
     handleSubmit(event){
         // this.props.get_token(this.state.login, this.state.password)
-        console.log(this.state.name)
-        console.log(this.state.users)
+        // console.log(this.state.name)
+        // console.log(this.state.users)
+        this.props.createProject(this.state.name, this.state.project_link, this.state.user)
         event.preventDefault()
     }
 

@@ -88,6 +88,18 @@ class App extends React.Component {
 
     }
 
+    createProject(name, project_link, user){
+        const headers = this.get_headers()
+        const data = {name:name, project_link:project_link, user=user}
+        axios.post(`http://127.0.01.:8000/api/projects/`, data, {headers})
+            .then(response => {
+                let new_project = response.data
+                const user = this.state.users.filter((item)=> item.id === new_project.user)[0]
+                new_project.user = user
+                this.setState({projects: [...this.state.projects, new_project]})
+            }).catch(error => console.log(error))
+    }
+
     load_data() {
         const headers = this.get_headers()
         console.log(headers)
@@ -156,7 +168,7 @@ class App extends React.Component {
                     <Routes>
                         <Route path='/' element={ <UserList users={this.state.users} />} />
                         <Route path='/projects' element={<ProjectsList projects={this.state.projects} delete_project={(id)=>this.delete_project(id)} /> } />
-                        <Route path='/projects/create' element={ <ProjectForm/> } />
+                        <Route path='/projects/create' element={ <ProjectForm createProject={(name, project_link, user) => this.createProject(name, project_link, user)} /> } />
                         <Route path='/todos' element={<TodosList todos={this.state.todos} delete_todo={(id)=>this.delete_todo(id)} /> } />
                         <Route path='/login' element={ <LoginForm get_token={(username, password) => this.get_token(username, password)} />} />
                         <Route path='/users' element={<Navigate replace to='/' />} />
