@@ -6,11 +6,11 @@ class UserModelSerializer(ModelSerializer):
     #url = HyperlinkedIdentityField(view_name ="usersapp:users-detail")
     class Meta:
         model = TodoUser
-        fields = ['url', 'username', 'first_name', 'last_name', 'email']
+        fields = ['id', 'url', 'username', 'first_name', 'last_name', 'email']
 
 
 class UserModelSerializerWithStaff(ModelSerializer):
     #url = HyperlinkedIdentityField(view_name="usersapp:users-detail")
     class Meta:
         model = TodoUser
-        fields = ['url', 'username', 'first_name', 'last_name', 'email', 'is_superuser', 'is_staff']
+        fields = ['id', 'url', 'username', 'first_name', 'last_name', 'email', 'is_superuser', 'is_staff']
