@@ -28,9 +28,9 @@ class ProjectForm extends React.Component{
         this.setState(
             {[event.target.name]: event.target.value}
         );
-        console.log(event.target.name ,event.target.value)
-        console.log(this.state.project_name)
-        console.log(this.state.project_users)
+        // console.log(event.target.name ,event.target.value)
+        // console.log(this.state.project_name)
+        // console.log(this.state.project_users)
     }
     handleSubmit(event){
         // this.props.get_token(this.state.login, this.state.password)

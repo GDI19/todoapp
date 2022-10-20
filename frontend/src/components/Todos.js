@@ -1,8 +1,9 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom';
 
 const TodoItem = ({todo, delete_todo}) => {
     return (
+
         <tr>
             <td>{todo.todo_author}</td>
             <td>{todo.todo_project}</td>
@@ -17,22 +18,25 @@ const TodoItem = ({todo, delete_todo}) => {
 
 const TodosList = ({todos, delete_todo}) => {
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Author</th>
-                    <th>Project</th>
-                    <th>Text</th>
-                    <th>Creation date</th>
-                    <th>Updated</th>
-                    <th>Open/Closed</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                    {todos.map((todo) => <TodoItem todo={todo} delete_todo={delete_todo}/>)}
-            </tbody>
-        </table>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Author</th>
+                        <th>Project</th>
+                        <th>Text</th>
+                        <th>Creation date</th>
+                        <th>Updated</th>
+                        <th>Open/Closed</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {todos.map((todo) => <TodoItem todo={todo} delete_todo={delete_todo}/>)}
+                </tbody>
+            </table>
+            <Link to='/todos/create'>Создать пометку</Link>
+        </div>
     )
 }
 
