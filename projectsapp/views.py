@@ -34,7 +34,7 @@ class ProjectModelViewSet(ModelViewSet):
     serializer_class = ProjectModelSerializer
     # pagination_class = ProjectPageNumberPagination
     # filterset_fields = ['project_name']
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     filterset_class = ProjectFilter
 
     def get_serializer_class(self):

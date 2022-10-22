@@ -32,7 +32,8 @@ router.register('todo', ToDoModelViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/<str:version>/', include(router.urls)),
+    # path('api/<str:version>/', include(router.urls)),
+    path('api/', include(router.urls)),
     path('api-token-auth/', views.obtain_auth_token),
 
     path('swagger<str:format>/', schema_view.without_ui()),
