@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import os
+# import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,14 +33,13 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:8000", ]
 # CORS_ORIGIN_ALLOW_ALL = True
 
 
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', # also required for serving GraphiQl, swagger ui's css/js
+    'django.contrib.staticfiles',  # also required for serving GraphiQl, swagger ui's css/js
 
     'rest_framework',
     'corsheaders',
@@ -73,7 +72,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 'DIRS': [],
-        'DIRS': [ BASE_DIR / 'frontend/build'],
+        'DIRS': [BASE_DIR / 'frontend/build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,18 +91,18 @@ WSGI_APPLICATION = 'todoapp.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db',
-        'USER': 'dante',
-        'PASSWORD': 'dante123456',
-        'HOST': 'db',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'db',
+    #     'USER': 'dante',
+    #     'PASSWORD': 'dante123456',
+    #     'HOST': 'db',
+    #     'PORT': '5432',
+    # }
 }
 
 # Password validation
@@ -151,11 +150,11 @@ AUTH_USER_MODEL = 'usersapp.TodoUser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES':[
+    'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
-    'DEFAULT_PARSER_CLASSES':[
+    'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ],
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',

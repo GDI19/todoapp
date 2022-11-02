@@ -1,6 +1,5 @@
 aniso8601==7.0.0
 appdirs==1.4.3
-apturl==0.5.2
 asgiref==3.4.1
 backports.entry-points-selectable==1.1.1
 bcrypt==3.1.7
